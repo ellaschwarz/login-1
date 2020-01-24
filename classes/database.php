@@ -1,13 +1,17 @@
-<?php  
+<?php
 
-/* ELLAS */ $unix_socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
+/* JOHANS */
 
+/* JOHANS */
+
+/* ELLAS & BRYAN */
+$unix_socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
 $db   = 'users_db';
 $user = 'root';
 $pass = 'root';
 $charset = 'utf8mb4';
-
 $dsn = "mysql:unix_socket=$unix_socket;dbname=$db;charset=$charset";
+/* ELLAS & BRYAN */
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -25,5 +29,4 @@ while ($row = $stmt->fetch() )
 {
     echo  '<p>' . $row['email'] . '</p>' . "\n";
 }
-
- ?>
+?>
