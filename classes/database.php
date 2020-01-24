@@ -25,8 +25,7 @@ try {
 }
 
 $stmt = $pdo->query('SELECT * FROM users_db.users');
-while ($row = $stmt->fetch() )
-{
+while ($row = $stmt->fetch()) {
     echo  '<p>' . $row['email'] . '</p>' . "\n";
 }
 ?>
