@@ -12,27 +12,29 @@
   <title>Create account</title>
 </head>
 <body>
-
-<create-account>
-    <div class="text-center bold">
-        <h1 id="create-account">Create account</h1>
-    </div>
-    <form action="/" method="post">
-        <div class="form-group">
-            <input type="text" class="form-control mt-2" name="firstName" placeholder="First name">
-            <input type="text" class="form-control mt-2" name="lastName" placeholder="Last name">
-            <input type="email" class="form-control mt-2" name="email" placeholder="Email">
-            <input type="password" class="form-input form-control mt-2" name="password" id="password"
-                placeholder="Password">
-            <span><i toggle="#password" class="fas fa-eye-slash toggle-password" id="eyeIcon"></i></span>
-            <input type="password" toggle="#verifyPassword" class="form input form-control mt-2" name="verifyPassword"
-                id="verifyPassword" placeholder="Repeat your password">
+<main-content>
+    <create-account>
+        <div class="text-center bold">
+            <h1 id="create-account">Create account</h1>
         </div>
+        <form action="/" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control mt-2" name="firstName" placeholder="First name">
+                <input type="text" class="form-control mt-2" name="lastName" placeholder="Last name">
+                <input type="email" class="form-control mt-2" name="email" placeholder="Email">
+                <input type="password" class="form-input form-control mt-2" name="password" id="password"
+                    placeholder="Password">
+                <span><i toggle="#password" class="fas fa-eye-slash toggle-password" id="eyeIcon"></i></span>
+                <input type="password" toggle="#verifyPassword" class="form input form-control mt-2" name="verifyPassword"
+                    id="verifyPassword" placeholder="Repeat your password">
+            </div>
 
-        <span>Already have an account? <a href="/" class="text-primary" id="login-link">Sign in!</a></span><br>
-        <input type="submit" value="Create account" class="btn btn-primary">
-    </form>
-</create-account>
+            <span>Already have an account? <a href="/" class="text-primary" id="login-link">Sign in!</a></span><br>
+            <input type="submit" value="Create account" class="btn btn-primary">
+        </form>
+    </create-account>
+</main-content>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
