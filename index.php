@@ -9,14 +9,14 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <link rel='stylesheet' href='/stylesheets/login.css'/>
+  <link rel='stylesheet' href='/styles/style.css'/>
   <title>Login</title>
 </head>
 
 <body>
-      <login-container>
+<main-content>
+    <login-container>
         <form action="/login" method="post">
-
           <div class="text-center bold">
             <h1 id="create-account">Welcome!</h1>
             <p>Log in with your username or email and password</p>
@@ -29,6 +29,8 @@
             <input type="submit" value="Sign in" class="btn btn-primary mt-1">
         </form>
       </login-container>
+</main-content>
+
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
