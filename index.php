@@ -23,7 +23,7 @@
           </div>
 
           <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username" id="usernameVal">
+            <input type="text" class="form-control" name="email" placeholder="email" id="emailVal">
             <input type="password" class="form-control mt-1" name="password" placeholder="Password">
             <span>Don't have an account? <a href="/register.php" class="text-primary" id="register">Create one!</a></span><br>
             <input type="submit" value="Sign in" class="btn btn-primary mt-1">
