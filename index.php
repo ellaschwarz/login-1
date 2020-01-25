@@ -34,6 +34,11 @@
 <?php 
 
 include 'classes/database.php';
+include 'classes/users.php';
+
+// Testing
+$persona = new User("Johan", "Garzon", "johan@johan", "micontrasena", "micontra");
+$persona->print();
 
 ?>
 

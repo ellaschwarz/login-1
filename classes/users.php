@@ -22,7 +22,7 @@ class User
 
     public function setName($name)
     {
-        // TODO: Make some string control for name variable
+        // TODO: Input control?
         $this->first_name = $name;
     }
 
@@ -34,7 +34,7 @@ class User
 
     public function setLastName($last)
     {
-        // TODO: Make som string control for last variable
+        // TODO: Input control?
         $this->last_name = $last;
     }
     
@@ -46,7 +46,7 @@ class User
 
     public function setEmail($email)
     {
-        // TODO: Make som string control for email variable
+        // TODO: Input control?
         $this->email = $email;
     }
     
@@ -58,8 +58,11 @@ class User
 
     public function setPassword($password, $verify)
     {
-        // TODO: Verify if passwords are equal
-        $this->password = $password;
+        if ($password == $verify) {
+            $this->password = $password;
+        } else {
+            echo "ERROR: Passwords do not match." . PHP_EOL;
+        }
     }
     
     public function getPassword()
@@ -69,15 +72,31 @@ class User
     }
 
 
+    public function isPasswordCorrect($password) {
+        /*
+        Retrieve hash-password from DB
+        Compare password entered by user with
+        the hashed-password.
+        Return True/False
+        */
+    }
 
-    public function register($username, $password)
+
+    public function registerOnDB()
     {
-        // Control parameters and register user.
+        /*
+        Parameters should have been controled by its own setter at this point.
+        Just SET all user info in DB
+        */
     }
 
     public function login($username, $password)
     {
-        // Check if user exists
+        /*
+        Check if user exists in DB.
+        Use: isPasswordCorrect($password) to crontrol.
+        Then... let user login ?
+        */
     }
 
     // Just for testing purposes
@@ -89,5 +108,3 @@ class User
     }
 }
 
-$persona = new User("Johan", "Garzon", "johan@johan", "micontrasena", "micontra");
-$persona->print();
