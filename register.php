@@ -30,7 +30,7 @@
             </div>
 
             <span>Already have an account? <a href="/" class="text-primary" id="login-link">Sign in!</a></span><br>
-            <input type="submit" value="Create account" class="btn btn-primary">
+            <input type="submit" value="Create account" class="btn btn-primary" name="submit_btn">
         </form>
     </create-account>
 </main-content>
@@ -39,14 +39,7 @@
 include 'classes/database.php';
 include 'classes/users.php';
 
-$first_name;
-$last_name;
-$email;
-$password;
-$verifiedpassword;
-
-$persona = new User($first_name, $last_name, $email, $password, $verifiedpassword);
-$persona->setName("Bryan"); ?>
+?>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

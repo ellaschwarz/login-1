@@ -22,13 +22,13 @@ class User
 
     public function setName($name)
     {
-        $this->first_name = $name;
-        $name = $_POST["firstname"];
         // TODO: Input control?
-        if (isset($name)) {
-            if (!is_string($name)) {
+        if (isset($_POST["firstname"])) {
+            if ($name != is_string($name) && $name != is_int($name)) {
+                echo "Name is not a string";
                 throw new Exception('$name must be a string!');
             } else {
+                $this->first_name = $name;
                 echo $name;
             }
         }
@@ -43,12 +43,11 @@ class User
     public function setLastName($last)
     {
         // TODO: Input control?
-        $this->last_name = $last;
-        $last = $_POST["lastname"];
         if (isset($last)) {
             if (!is_string($last)) {
                 throw new Exception('$name must be a string!');
             } else {
+                $this->last_name = $last;
                 echo $last;
             }
         }
@@ -62,10 +61,8 @@ class User
 
     public function setEmail($email)
     {
-        // TODO: Input control?
-        $this->email = $email;
-        $email = $_POST["email"];
         if (isset($email)) {
+            $this->email = $email;
             echo $email;
         }
     }
@@ -78,11 +75,9 @@ class User
 
     public function setPassword($password, $verified_password)
     {
-        $password = $_POST["password"];
-        $verified_password = $_POST["verifiedpassword"];
 
         if (isset($password, $verified_password)) {
-            if ($password === $verified_password) {
+            if ($password === $verified_password && $password !== "" && $verified_password !== "") {
                 $this->password = $password;
                 echo "passwords matches";
             } else {

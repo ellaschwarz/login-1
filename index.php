@@ -35,14 +35,14 @@
 include 'classes/database.php';
 include 'classes/users.php';
 
-$first_name;
-$last_name;
-$email;
-$password;
-$verifiedpassword;
+$first_name = $_POST["firstname"];
+$last_name = $_POST["lastname"];
+$email = $_POST["email"];
+$password = $_POST["password"];
+$verifiedpassword = $_POST["verifiedpassword"];
 
 $persona = new User($first_name, $last_name, $email, $password, $verifiedpassword);
-$persona->setName($first_name);
+//$persona->setName($first_name);
 ?>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
