@@ -40,6 +40,10 @@ include 'classes/users.php';
 $object = new DataBase();
 $object->connect();
 
+//Calling getAllUsers method
+$getUserobject = new User();
+$getUserobject->getAllUsers();
+
 $first_name = $_POST["firstname"];
 $last_name = $_POST["lastname"];
 $email = $_POST["email"];
