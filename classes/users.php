@@ -22,8 +22,16 @@ class User
 
     public function setName($name)
     {
-        // TODO: Input control?
         $this->first_name = $name;
+        $name = $_POST["firstname"];
+        // TODO: Input control?
+        if (isset($name)) {
+            if (!is_string($name)) {
+                throw new Exception('$name must be a string!');
+            } else {
+                echo $name;
+            }
+        }
     }
 
     public function getName()
@@ -36,6 +44,14 @@ class User
     {
         // TODO: Input control?
         $this->last_name = $last;
+        $last = $_POST["lastname"];
+        if (isset($last)) {
+            if (!is_string($last)) {
+                throw new Exception('$name must be a string!');
+            } else {
+                echo $last;
+            }
+        }
     }
     
     public function getLastName()
@@ -48,6 +64,10 @@ class User
     {
         // TODO: Input control?
         $this->email = $email;
+        $email = $_POST["email"];
+        if (isset($email)) {
+            echo $email;
+        }
     }
     
     public function getEmail()
@@ -56,12 +76,18 @@ class User
         return $this->email;
     }
 
-    public function setPassword($password, $verify)
+    public function setPassword($password, $verified_password)
     {
-        if ($password == $verify) {
-            $this->password = $password;
-        } else {
-            echo "ERROR: Passwords do not match." . PHP_EOL;
+        $password = $_POST["password"];
+        $verified_password = $_POST["verifiedpassword"];
+
+        if (isset($password, $verified_password)) {
+            if ($password === $verified_password) {
+                $this->password = $password;
+                echo "passwords matches";
+            } else {
+                echo "ERROR: Passwords do not match." . PHP_EOL;
+            }
         }
     }
     
@@ -72,7 +98,8 @@ class User
     }
 
 
-    public function isPasswordCorrect($password) {
+    public function isPasswordCorrect($password)
+    {
         /*
         Retrieve hash-password from DB
         Compare password entered by user with
@@ -100,11 +127,11 @@ class User
     }
 
     // Just for testing purposes
-    public function print() {
-        echo "Name is $this->first_name" . PHP_EOL;
-        echo "Last name is $this->last_name" . PHP_EOL;
-        echo "Email is $this->email" . PHP_EOL;
-        echo "Password is $this->password" . PHP_EOL;
+    public function print()
+    {
+        // echo "Name is $this->first_name" . PHP_EOL;
+        // echo "Last name is $this->last_name" . PHP_EOL;
+        // echo "Email is $this->email" . PHP_EOL;
+        // echo "Password is $this->password" . PHP_EOL;
     }
 }
-
