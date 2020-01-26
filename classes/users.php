@@ -1,6 +1,6 @@
 <?php
 
-class User
+class User extends DataBase
 {
     /* Ändrade variabler names from camelCase till snake_case
         Hade läst att det är en best practice. Är det ok med er?

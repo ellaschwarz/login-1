@@ -1,3 +1,14 @@
+<?php
+
+include 'classes/database.php';
+include 'classes/users.php';
+
+//Testing
+$persona = new User("Johan", "Garzon", "johan@johan", "micontrasena", "micontra");
+$persona->print();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +25,12 @@
 </head>
 
 <body>
+
+<?php
+//Checking connection to database
+$object = new DataBase();
+$object->connect();
+?>
 
 <main-content>
     <login-container>
@@ -32,16 +49,7 @@
       </login-container>
 </main-content>
 
-<?php 
 
-include 'classes/database.php';
-include 'classes/users.php';
-
-// Testing
-$persona = new User("Johan", "Garzon", "johan@johan", "micontrasena", "micontra");
-$persona->print();
-
-?>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
