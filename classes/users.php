@@ -30,11 +30,24 @@ class User extends DataBase
         while ($row = $stmt->fetch()) {
             echo  '<p>' . $row['email'] . '</p>' . "\n";
         }
+    }
 
-                // $stmt = $pdo->query('SELECT * FROM users_db.users');
-        // while ($row = $stmt->fetch()) {
-        //     echo  '<p>' . $row['email'] . '</p>' . "\n";
-        // }
+    /*Testar att hämta alla users med prepares statements*/
+    public function getAllUsersStmt()
+    {
+        //Kör statementet i databasen före användaren skriver in sin input vilket skyddar koden från att användaren 
+        $sql = 'SELECT * FROM users_db.users WHERE firstname = ? AND lastname = ?';
+        //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
+        $stmt = $this->connect()->query($sql);
+        //Fetching the data
+        while ($row = $stmt->fetch()) {
+            echo  '<p>' . $row['email'] . '</p>' . "\n";
+        }
+    
+                    // $stmt = $pdo->query('SELECT * FROM users_db.users');
+            // while ($row = $stmt->fetch()) {
+            //     echo  '<p>' . $row['email'] . '</p>' . "\n";
+            // }
     }
 
     public function setName($name)
