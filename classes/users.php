@@ -31,7 +31,7 @@ class User extends DataBase
             echo  '<p>' . $row['email'] . '</p>' . "\n";
         }
 
-                // $stmt = $pdo->query('SELECT * FROM users_db.users');
+         // $stmt = $pdo->query('SELECT * FROM users_db.users');
         // while ($row = $stmt->fetch()) {
         //     echo  '<p>' . $row['email'] . '</p>' . "\n";
         // }
