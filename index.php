@@ -56,6 +56,15 @@ $object->connect();
 $getUserobject = new User($first_name, $last_name, $email, $password, $verifiedpassword);
 $getUserobject->getAllUsers();
 
+//Validates user input, returns value if OK otherwise returns false.
+$set_first_name = $getUserobject->setName($first_name);
+$set_last_name = $getUserobject->setLastName($last_name);
+$set_email = $getUserobject->setEmail($email);
+$set_password = $getUserobject->setPassword($password, $verifiedpassword);
+
+//Calls setUser function to insert the user into DB. Only inserts if values are not false.
+$getUserobject->setUser($set_first_name, $set_last_name, $set_email, $set_password);
+
 ?>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
