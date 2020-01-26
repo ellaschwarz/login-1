@@ -1,3 +1,8 @@
+<?php
+include 'classes/database.php';
+include 'classes/users.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,16 +38,6 @@
 </main-content>
 
 <?php
-include 'classes/database.php';
-include 'classes/users.php';
-
-//Checking connection to database
-$object = new DataBase();
-$object->connect();
-
-//Calling getAllUsers method
-$getUserobject = new User();
-$getUserobject->getAllUsers();
 
 $first_name = $_POST["firstname"];
 $last_name = $_POST["lastname"];
@@ -52,6 +47,15 @@ $verifiedpassword = $_POST["verifiedpassword"];
 
 $persona = new User($first_name, $last_name, $email, $password, $verifiedpassword);
 //$persona->setName($first_name);
+
+//Checking connection to database
+$object = new DataBase();
+$object->connect();
+
+//Calling getAllUsers method
+$getUserobject = new User();
+$getUserobject->getAllUsers();
+
 ?>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
