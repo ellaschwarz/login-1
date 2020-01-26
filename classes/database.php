@@ -23,9 +23,9 @@ class DataBase {
     //     $this->charset = 'utf8mb4';
 
     //     try {
-    //         $dsn = 'mysql:host=$host;port=$port;dbname=$db;charset=$charset';
+    //         $dsn = "mysql:host=$this->host;port=$this->port;dbname=$this->db;charset=$this->charset";
     //         $pdo = new PDO($dsn, $this->user, $this->pass);
-    //         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     //         return $pdo;
     //         //Om det blir error så kan felmeddelandet visas på sidan
     //     } catch (PDOException $e) {
@@ -46,16 +46,13 @@ class DataBase {
         try {
             $dsn = "mysql:unix_socket=$this->unix_socket;dbname=$this->db;charset=$this->charset";
             $pdo = new PDO($dsn, $this->user, $this->pass);
+            //Fetch mode måste vara som associative arrays. Används sen i users för att fetcha data.
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             return $pdo;
             //Om det blir error så visas felmeddelandet på sidan
         } catch (PDOException $e) {
             echo "Unable to connect: ".$e->getMessage();
         }
-        // $stmt = $pdo->query('SELECT * FROM users_db.users');
-        // while ($row = $stmt->fetch()) {
-        //     echo  '<p>' . $row['email'] . '</p>' . "\n";
-        // }
     }
 }
     /* ELLAS & BRYANS */

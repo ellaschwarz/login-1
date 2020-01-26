@@ -30,6 +30,10 @@ $persona->print();
 //Checking connection to database
 $object = new DataBase();
 $object->connect();
+
+//Calling getAllUsers method
+$getUserobject = new User();
+$getUserobject->getAllUsers();
 ?>
 
 <main-content>
