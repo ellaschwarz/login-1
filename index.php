@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
 <main-content>
     <login-container>
         <form action="/login" method="post">
@@ -34,6 +35,10 @@
 <?php
 include 'classes/database.php';
 include 'classes/users.php';
+
+//Checking connection to database
+$object = new DataBase();
+$object->connect();
 
 $first_name = $_POST["firstname"];
 $last_name = $_POST["lastname"];
