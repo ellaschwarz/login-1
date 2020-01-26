@@ -1,13 +1,23 @@
 <?php
 
-/* ELLAS */ $unix_socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
-
+/* JOHANS */
+/* $host = '127.0.0.1';
+$port = '10003';
 $db   = 'users_db';
 $user = 'root';
 $pass = 'root';
 $charset = 'utf8mb4';
+$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset"; */
+/* JOHANS */
 
+/* ELLAS & BRYAN */
+$unix_socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
+$db   = 'users_db';
+$user = 'root';
+$pass = 'root';
+$charset = 'utf8mb4';
 $dsn = "mysql:unix_socket=$unix_socket;dbname=$db;charset=$charset";
+/* ELLAS & BRYAN */
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -24,3 +34,4 @@ $stmt = $pdo->query('SELECT * FROM users_db.users');
 while ($row = $stmt->fetch()) {
     echo  '<p>' . $row['email'] . '</p>' . "\n";
 }
+?>
