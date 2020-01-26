@@ -12,13 +12,13 @@ class User extends DataBase
     private $verified_password;
     private $hashed;    // Necessary ?
 
-    // public function __construct($first_name, $last_name, $email, $password, $verified_password)
-    // {
-    //     $this->setName($first_name);
-    //     $this->setLastName($last_name);
-    //     $this->setEmail($email);
-    //     $this->setPassword($password, $verified_password);
-    // }
+    public function __construct($first_name, $last_name, $email, $password, $verified_password)
+    {
+        $this->setName($first_name);
+        $this->setLastName($last_name);
+        $this->setEmail($email);
+        $this->setPassword($password, $verified_password);
+    }
 
     /*Testar att hämta alla users*/
     public function getAllUsers()
