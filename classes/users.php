@@ -33,7 +33,7 @@ class User extends DataBase
     // }
 
     /*Testar att hämta alla users med prepared statements*/
-    public function getAllUsersStmt($first_name, $last_name)
+    public function getAllUsersStmt($firstname, $lastname)
     {
         /*Kör statementet i databasen före användaren skriver in sin input vilket skyddar
         koden från att användaren lägger in något i databasen*/
@@ -41,7 +41,7 @@ class User extends DataBase
         //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
         $stmt = $this->connect()->prepare($sql);
         //executing datan som användaren har skrivit in
-        $stmt->execute([$first_name, $last_name]);
+        $stmt->execute([$firstname, $lastname]);
         //Getting all names
         $names=$stmt->fetchAll();
 
@@ -53,16 +53,16 @@ class User extends DataBase
     public function setName($name)
     {
         // TODO: Input control?
-    if (isset($_POST["firstname"])) {
-        if ($name != is_string($name) && $name != is_int($name)) {
-            echo "Name is not a string";
-            throw new Exception('$name must be a string!');
-            return false;
-        } else {
-            //echo $name;
-            return $this->first_name = $name;
+        if (isset($_POST["firstname"])) {
+            if ($name != is_string($name) && $name != is_int($name)) {
+                echo "Name is not a string";
+                throw new Exception('$name must be a string!');
+                return false;
+            } else {
+                //echo $name;
+                return $this->first_name = $name;
+            }
         }
-    }
     }
 
     //Får värden från "setX" funktionerna efter att de har validerats och skickar resultatet till databasen om de ha gått igenom valideringen.
@@ -78,9 +78,15 @@ class User extends DataBase
         }
     }
 
-    public function getName()
+    public function getName($firstname)
     {
-        // Elegant and robust database code goes here
+        $sql = 'SELECT * FROM users_db.users WHERE firstname = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$firstname]);
+        $names=$stmt->fetchAll();
+
+        echo  '<p>' . $name['firstname'] . '</p>' . "\n";
+
         return $this->first_name;
     }
 
@@ -92,39 +98,47 @@ class User extends DataBase
                 throw new Exception('$name must be a string!');
                 return false;
             } else {
-<<<<<<< HEAD
-                $this->last_name = $last;
-                //echo $last;
-=======
                 return $this->last_name = $last;
->>>>>>> 76edceca3d39e4db8ff8266e603bccc1adb6ace7
             }
         }
     }
     
-    public function getLastName()
+    public function getLastName($lastname)
     {
-        // Elegant and robust database code goes here
+        $sql = 'SELECT * FROM users_db.users WHERE lastname = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$lastname]);
+
+        $lastnames=$stmt->fetchAll();
+
+        foreach ($lastnames as $lastname) {
+            echo  '<p>' . $name['lastname'] . '</p>' . "\n";
+
+        }
         return $this->last_name;
     }
 
     public function setEmail($email)
     {
         if (isset($email)) {
-<<<<<<< HEAD
-            $this->email = $email;
-            //echo $email;
-=======
             return $this->email = $email;
         } else {
             return false;
->>>>>>> 76edceca3d39e4db8ff8266e603bccc1adb6ace7
         }
     }
     
     public function getEmail()
     {
-        // Elegant and robust database code goes here
+        $sql = 'SELECT * FROM users_db.users WHERE email = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$email]);
+
+        $emails=$stmt->fetchAll();
+
+        foreach ($emails as $email) {
+            echo  '<p>' . $name['email'] . '</p>' . "\n";
+
+        }
         return $this->email;
     }
 
@@ -143,7 +157,16 @@ class User extends DataBase
     
     public function getPassword()
     {
-        // Elegant and robust database code goes here
+        $sql = 'SELECT * FROM users_db.users WHERE password = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$password]);
+
+        $passwords=$stmt->fetchAll();
+
+        foreach ($passwords as $password) {
+            echo  '<p>' . $name['password'] . '</p>' . "\n";
+
+        }
         return $this->password;
     }
 

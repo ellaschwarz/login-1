@@ -22,7 +22,7 @@ include 'classes/users.php';
 
 <main-content>
     <login-container>
-        <form action="/login" method="post">
+        <form action="main.php" method="post">
           <div class="text-center bold">
             <h1 id="create-account">Welcome!</h1>
             <p>Log in with your username or email and password</p>
@@ -55,7 +55,8 @@ $object->connect();
 //Calling getAllUsers method
 $getUserobject = new User($first_name, $last_name, $email, $password, $verifiedpassword);
 //$getUserobject->getAllUsers();
-$getUserobject->getAllUsersStmt($first_name, $last_name);
+$getUserobject->getAllUsersStmt("Ella", "Schwarz");
+$getUserobject->getName($first_name);
 
 //Validates user input, returns value if OK otherwise returns false.
 $set_first_name = $getUserobject->setName($first_name);
