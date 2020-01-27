@@ -7,10 +7,13 @@ include 'classes/users.php';
 $object = new DataBase();
 $object->connect();
 
+$email_login = $_POST['email_login'];
+echo $email_login;
+
 //Calling getAllUsers method
 $getUserobject = new User($first_name, $last_name, $email, $password, $verifiedpassword);
 //$getUserobject->getAllUsers();
-$getUserobject->getAllUsersStmt("Ella", "Schwarz");
+$user = $getUserobject->getAllUsersStmt($email_login);
 //$getUserobject->getName($first_name);
 $getUserobject->getName("Bryan");
 $getUserobject->getName("Santamaria");
@@ -30,7 +33,7 @@ $getUserobject->getName("Santamaria");
 </head>
 <body>
 
-<h1>Hello</h1> <?php $name['firstname'] ?> 
+<h1>Hello <?php echo $user ?> </h1>
     
 </body>
 </html>

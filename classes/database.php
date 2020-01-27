@@ -1,7 +1,8 @@
 <?php
 
 
-class DataBase {
+class DataBase
+{
 
     private $host;
     private $port;

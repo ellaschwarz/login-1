@@ -20,34 +20,24 @@ class User extends DataBase
         $this->setPassword($password, $verified_password);
     }
 
-    /*Testar att hämta alla users*/
-    // public function getAllUsers()
-    // {
-    //     $sql = 'SELECT * FROM users_db.users';
-    //     //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
-    //     $stmt = $this->connect()->query($sql);
-    //     //Fetching the data
-    //     while ($row = $stmt->fetch()) {
-    //         echo  '<p>' . $row['email'] . '</p>' . "\n";
-    //     }
-    // }
-
-    /*Testar att hämta alla users med prepared statements*/
-    public function getAllUsersStmt($firstname, $lastname)
+    public function getAllUsersStmt($email)
     {
         /*Kör statementet i databasen före användaren skriver in sin input vilket skyddar
         koden från att användaren lägger in något i databasen*/
-        $sql = 'SELECT * FROM users_db.users WHERE firstname = ? AND lastname = ?';
+        $sql = 'SELECT * FROM users_db.users WHERE email = ?';
         //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
         $stmt = $this->connect()->prepare($sql);
         //executing datan som användaren har skrivit in
-        $stmt->execute([$firstname, $lastname]);
-        //Getting all names
-        $names=$stmt->fetchAll();
+        $stmt->execute([$email]);
+        //Getting all users with that email
+        $users=$stmt->fetchAll();
 
-        foreach ($names as $name) {
-            echo  '<p>' . $name['firstname'] . '</p>' . "\n";
+        foreach ($users as $user) {
+            echo  '<p>' . $user['firstname'] . '</p>' . "\n";
+            echo  '<p>' . $user['email'] . '</p>' . "\n";
         }
+        print_r($users);
+        return $user['firstname'];
     }
 
     public function setName($name)
@@ -80,13 +70,6 @@ class User extends DataBase
 
     public function getName($firstname)
     {
-        $sql = 'SELECT * FROM users_db.users WHERE firstname = ?';
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$firstname]);
-        $names=$stmt->fetchAll();
-
-        echo  '<p>' . $name['firstname'] . '</p>' . "\n";
-
         return $this->first_name;
     }
 
@@ -105,16 +88,6 @@ class User extends DataBase
     
     public function getLastName($lastname)
     {
-        $sql = 'SELECT * FROM users_db.users WHERE lastname = ?';
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$lastname]);
-
-        $lastnames=$stmt->fetchAll();
-
-        foreach ($lastnames as $lastname) {
-            echo  '<p>' . $name['lastname'] . '</p>' . "\n";
-
-        }
         return $this->last_name;
     }
 
@@ -129,16 +102,6 @@ class User extends DataBase
     
     public function getEmail()
     {
-        $sql = 'SELECT * FROM users_db.users WHERE email = ?';
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$email]);
-
-        $emails=$stmt->fetchAll();
-
-        foreach ($emails as $email) {
-            echo  '<p>' . $name['email'] . '</p>' . "\n";
-
-        }
         return $this->email;
     }
 
@@ -157,16 +120,16 @@ class User extends DataBase
     
     public function getPassword()
     {
-        $sql = 'SELECT * FROM users_db.users WHERE password = ?';
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$password]);
+        // $sql = 'SELECT * FROM users_db.users WHERE password = ?';
+        // $stmt = $this->connect()->prepare($sql);
+        // $stmt->execute([$password]);
 
-        $passwords=$stmt->fetchAll();
+        // $passwords=$stmt->fetchAll();
 
-        foreach ($passwords as $password) {
-            echo  '<p>' . $name['password'] . '</p>' . "\n";
+        // foreach ($passwords as $password) {
+        //     echo  '<p>' . $name['password'] . '</p>' . "\n";
 
-        }
+        // }
         return $this->password;
     }
 

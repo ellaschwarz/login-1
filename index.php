@@ -29,8 +29,8 @@ include 'classes/users.php';
           </div>
 
           <div class="form-group">
-            <input type="text" class="form-control" name="email" placeholder="Email" id="emailVal">
-            <input type="password" class="form-control mt-1" name="password" placeholder="Password">
+            <input type="text" class="form-control" name="email_login" placeholder="Email" id="emailVal">
+            <input type="password" class="form-control mt-1" name="password_login" placeholder="Password">
             <span>Don't have an account? <a href="/register.php" class="text-primary" id="register">Create one!</a></span><br>
             <input type="submit" value="Sign in" class="btn btn-primary mt-1">
         </form>
@@ -39,6 +39,7 @@ include 'classes/users.php';
 
 <?php
 
+//Saving user values from register form into variables
 $first_name = $_POST["firstname"];
 $last_name = $_POST["lastname"];
 $email = $_POST["email"];
@@ -55,8 +56,8 @@ $object->connect();
 //Calling getAllUsers method
 $getUserobject = new User($first_name, $last_name, $email, $password, $verifiedpassword);
 //$getUserobject->getAllUsers();
-$getUserobject->getAllUsersStmt("Ella", "Schwarz");
-$getUserobject->getName($first_name);
+// $getUserobject->getAllUsersStmt("Ella", "Schwarz");
+// $getUserobject->getName($first_name);
 
 //Validates user input, returns value if OK otherwise returns false.
 $set_first_name = $getUserobject->setName($first_name);
