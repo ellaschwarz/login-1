@@ -50,7 +50,7 @@ class User extends DataBase
                 return false;
             } else {
                 //echo $name;
-                return $this->first_name = $name;
+                $this->first_name = $name;
             }
         }
     }
@@ -68,7 +68,7 @@ class User extends DataBase
         }
     }
 
-    public function getName($firstname)
+    public function getName()
     {
         return $this->first_name;
     }
@@ -81,12 +81,12 @@ class User extends DataBase
                 throw new Exception('$name must be a string!');
                 return false;
             } else {
-                return $this->last_name = $last;
+                $this->last_name = $last;
             }
         }
     }
     
-    public function getLastName($lastname)
+    public function getLastName()
     {
         return $this->last_name;
     }
@@ -94,7 +94,7 @@ class User extends DataBase
     public function setEmail($email)
     {
         if (isset($email)) {
-            return $this->email = $email;
+            $this->email = $email;
         } else {
             return false;
         }
@@ -110,7 +110,7 @@ class User extends DataBase
         if (isset($password, $verified_password)) {
             if ($password === $verified_password && $password !== "" && $verified_password !== "") {
                 echo "passwords matches";
-                return $this->password = $password;
+                $this->password = $password;
             } else {
                 echo "ERROR: Passwords do not match." . PHP_EOL;
                 return false;
