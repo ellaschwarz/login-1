@@ -59,11 +59,21 @@ class User extends DataBase
     public function setUser($set_first_name, $set_last_name, $set_email, $set_password)
     {
         if (isset($_POST["submit_btn"])) {
+            //Checks if any of the users inputs are valid (not false).
             if ($set_first_name !== false && $set_last_name !== false && $set_email !== false && $set_password !== false) {
-                $sql = ("INSERT INTO users_db.users(firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-                $statement = $this->connect()->prepare($sql);
-                $statement->execute([$set_first_name, $set_last_name, $set_email, $set_password]);
-                echo "Successfully inserted user into DB!";
+                //Checks in DB if email already exsists.
+                $sql_user_exsist = ("SELECT email FROM users_db.users WHERE email = :email");
+                $sthandler = $this->connect()->prepare($sql_user_exsist);
+                $sthandler->bindParam(':email', $set_email);
+                $sthandler->execute();
+                if ($sthandler->rowCount() > 0) {
+                    echo "Email already registerd! Please choose another email";
+                } else {
+                    $sql = ("INSERT INTO users_db.users(firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+                    $statement = $this->connect()->prepare($sql);
+                    $statement->execute([$set_first_name, $set_last_name, $set_email, $set_password]);
+                    echo "Successfully inserted user into DB!";
+                }
             }
         }
     }
@@ -112,7 +122,7 @@ class User extends DataBase
                 echo "passwords matches";
                 $this->password = $password;
             } else {
-                echo "ERROR: Passwords do not match." . PHP_EOL;
+                echo "ERROR: Passwords do not match.";
                 return $this->password = false;
             }
         }
