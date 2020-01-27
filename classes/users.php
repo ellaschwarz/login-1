@@ -21,39 +21,34 @@ class User extends DataBase
     }
 
     /*Testar att hämta alla users*/
-    public function getAllUsers()
+    // public function getAllUsers()
+    // {
+    //     $sql = 'SELECT * FROM users_db.users';
+    //     //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
+    //     $stmt = $this->connect()->query($sql);
+    //     //Fetching the data
+    //     while ($row = $stmt->fetch()) {
+    //         echo  '<p>' . $row['email'] . '</p>' . "\n";
+    //     }
+    // }
+
+    /*Testar att hämta alla users med prepared statements*/
+    public function getAllUsersStmt($first_name, $last_name)
     {
-        $sql = 'SELECT * FROM users_db.users';
+        /*Kör statementet i databasen före användaren skriver in sin input vilket skyddar
+        koden från att användaren lägger in något i databasen*/
+        $sql = 'SELECT * FROM users_db.users WHERE firstname = ? AND lastname = ?';
         //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
-        $stmt = $this->connect()->query($sql);
-        //Fetching the data
-        while ($row = $stmt->fetch()) {
-            echo  '<p>' . $row['email'] . '</p>' . "\n";
+        $stmt = $this->connect()->prepare($sql);
+        //executing datan som användaren har skrivit in
+        $stmt->execute([$first_name, $last_name]);
+        //Getting all names
+        $names=$stmt->fetchAll();
+
+        foreach ($names as $name) {
+            echo  '<p>' . $name['firstname'] . '</p>' . "\n";
         }
-
-         // $stmt = $pdo->query('SELECT * FROM users_db.users');
-        // while ($row = $stmt->fetch()) {
-        //     echo  '<p>' . $row['email'] . '</p>' . "\n";
-        // }
     }
-
-        /*Testar att hämta alla users med prepares statements*/
-        public function getAllUsersStmt()
-        {
-            //Kör statementet i databasen före användaren skriver in sin input vilket skyddar koden från att användaren 
-            $sql = 'SELECT * FROM users_db.users WHERE firstname = ? AND lastname = ?';
-            //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
-            $stmt = $this->connect()->query($sql);
-            //Fetching the data
-            while ($row = $stmt->fetch()) {
-                echo  '<p>' . $row['email'] . '</p>' . "\n";
-            }
-    
-                        // $stmt = $pdo->query('SELECT * FROM users_db.users');
-                // while ($row = $stmt->fetch()) {
-                //     echo  '<p>' . $row['email'] . '</p>' . "\n";
-                // }
-         }
 
     public function setName($name)
     {
@@ -64,7 +59,7 @@ class User extends DataBase
                 throw new Exception('$name must be a string!');
             } else {
                 $this->first_name = $name;
-                echo $name;
+                //echo $name;
             }
         }
     }
@@ -83,7 +78,7 @@ class User extends DataBase
                 throw new Exception('$name must be a string!');
             } else {
                 $this->last_name = $last;
-                echo $last;
+                //echo $last;
             }
         }
     }
@@ -98,7 +93,7 @@ class User extends DataBase
     {
         if (isset($email)) {
             $this->email = $email;
-            echo $email;
+            //echo $email;
         }
     }
     

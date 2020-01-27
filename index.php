@@ -54,7 +54,8 @@ $object->connect();
 
 //Calling getAllUsers method
 $getUserobject = new User($first_name, $last_name, $email, $password, $verifiedpassword);
-$getUserobject->getAllUsers();
+//$getUserobject->getAllUsers();
+$getUserobject->getAllUsersStmt($first_name, $last_name);
 
 ?>
 
