@@ -46,9 +46,6 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $verifiedpassword = $_POST["verifiedpassword"];
 
-// $persona = new User($first_name, $last_name, $email, $password, $verifiedpassword);
-// $persona->getAllUsers();
-
 //Checking connection to database
 $object = new DataBase();
 $object->connect();
@@ -70,8 +67,8 @@ $get_last_name = $getUserobject->getLastName();
 $get_email = $getUserobject->getEmail();
 $get_password = $getUserobject->getPassword();
 
-//Calls setUser function to insert the user into DB. Only inserts if values are not false.
-$getUserobject->setUser($get_first_name, $get_last_name, $get_email, $get_password);
+//Calls registerUserInDb function to insert the user into DB. Only inserts if values are not false.
+$getUserobject->registerUserInDB($get_first_name, $get_last_name, $get_email, $get_password);
 
 ?>
 

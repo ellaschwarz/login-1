@@ -56,12 +56,12 @@ class User extends DataBase
     }
 
     //Får värden från "setX" funktionerna efter att de har validerats och skickar resultatet till databasen om de ha gått igenom valideringen.
-    public function setUser($set_first_name, $set_last_name, $set_email, $set_password)
+    public function registerUserInDB($set_first_name, $set_last_name, $set_email, $set_password)
     {
         if (isset($_POST["submit_btn"])) {
             //Checks if any of the users inputs are valid (not false).
             if ($set_first_name !== false && $set_last_name !== false && $set_email !== false && $set_password !== false) {
-                //Checks in DB if email already exsists.
+                //Checks in DB if email already exsists, else it inserts the users validated inputs into DB.
                 $sql_user_exsist = ("SELECT email FROM users_db.users WHERE email = :email");
                 $sthandler = $this->connect()->prepare($sql_user_exsist);
                 $sthandler->bindParam(':email', $set_email);
