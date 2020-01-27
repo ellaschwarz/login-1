@@ -53,13 +53,27 @@ class User extends DataBase
     public function setName($name)
     {
         // TODO: Input control?
-        if (isset($_POST["firstname"])) {
-            if ($name != is_string($name) && $name != is_int($name)) {
-                echo "Name is not a string";
-                throw new Exception('$name must be a string!');
-            } else {
-                $this->first_name = $name;
-                //echo $name;
+    if (isset($_POST["firstname"])) {
+        if ($name != is_string($name) && $name != is_int($name)) {
+            echo "Name is not a string";
+            throw new Exception('$name must be a string!');
+            return false;
+        } else {
+            //echo $name;
+            return $this->first_name = $name;
+        }
+    }
+    }
+
+    //Får värden från "setX" funktionerna efter att de har validerats och skickar resultatet till databasen om de ha gått igenom valideringen.
+    public function setUser($set_first_name, $set_last_name, $set_email, $set_password)
+    {
+        if (isset($_POST["submit_btn"])) {
+            if ($set_first_name !== false && $set_last_name !== false && $set_email !== false && $set_password !== false) {
+                $sql = ("INSERT INTO users_db.users(firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+                $statement = $this->connect()->prepare($sql);
+                $statement->execute([$set_first_name, $set_last_name, $set_email, $set_password]);
+                echo "Successfully inserted user into DB!";
             }
         }
     }
@@ -76,9 +90,14 @@ class User extends DataBase
         if (isset($last)) {
             if (!is_string($last)) {
                 throw new Exception('$name must be a string!');
+                return false;
             } else {
+<<<<<<< HEAD
                 $this->last_name = $last;
                 //echo $last;
+=======
+                return $this->last_name = $last;
+>>>>>>> 76edceca3d39e4db8ff8266e603bccc1adb6ace7
             }
         }
     }
@@ -92,8 +111,14 @@ class User extends DataBase
     public function setEmail($email)
     {
         if (isset($email)) {
+<<<<<<< HEAD
             $this->email = $email;
             //echo $email;
+=======
+            return $this->email = $email;
+        } else {
+            return false;
+>>>>>>> 76edceca3d39e4db8ff8266e603bccc1adb6ace7
         }
     }
     
@@ -105,13 +130,13 @@ class User extends DataBase
 
     public function setPassword($password, $verified_password)
     {
-
         if (isset($password, $verified_password)) {
             if ($password === $verified_password && $password !== "" && $verified_password !== "") {
-                $this->password = $password;
                 echo "passwords matches";
+                return $this->password = $password;
             } else {
                 echo "ERROR: Passwords do not match." . PHP_EOL;
+                return false;
             }
         }
     }
