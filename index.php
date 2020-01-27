@@ -65,13 +65,13 @@ $getUserobject->setLastName($last_name);
 $getUserobject->setEmail($email);
 $getUserobject->setPassword($password, $verifiedpassword);
 
-$set_first_name = $getUserobject->getName();
-$set_last_name = $getUserobject->getLastName();
-$set_email = $getUserobject->getEmail();
-$set_password = $getUserobject->getPassword();
+$get_first_name = $getUserobject->getName();
+$get_last_name = $getUserobject->getLastName();
+$get_email = $getUserobject->getEmail();
+$get_password = $getUserobject->getPassword();
 
 //Calls setUser function to insert the user into DB. Only inserts if values are not false.
-$getUserobject->setUser($set_first_name, $set_last_name, $set_email, $set_password);
+$getUserobject->setUser($get_first_name, $get_last_name, $get_email, $get_password);
 
 ?>
 

@@ -47,7 +47,7 @@ class User extends DataBase
             if ($name != is_string($name) && $name != is_int($name)) {
                 echo "Name is not a string";
                 throw new Exception('$name must be a string!');
-                return false;
+                return $this->first_name = false;
             } else {
                 //echo $name;
                 $this->first_name = $name;
@@ -79,7 +79,7 @@ class User extends DataBase
         if (isset($last)) {
             if (!is_string($last)) {
                 throw new Exception('$name must be a string!');
-                return false;
+                return $this->last_name = false;
             } else {
                 $this->last_name = $last;
             }
@@ -96,7 +96,7 @@ class User extends DataBase
         if (isset($email)) {
             $this->email = $email;
         } else {
-            return false;
+            return $this->email = false;
         }
     }
     
@@ -113,7 +113,7 @@ class User extends DataBase
                 $this->password = $password;
             } else {
                 echo "ERROR: Passwords do not match." . PHP_EOL;
-                return false;
+                return $this->password = false;
             }
         }
     }
