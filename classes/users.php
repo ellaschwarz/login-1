@@ -2,15 +2,14 @@
 
 class User extends DataBase
 {
-    /* Ändrade variabler names from camelCase till snake_case
-        Hade läst att det är en best practice. Är det ok med er?
-        Annars ändrar tillbaka  :) */
     private $first_name;
     private $last_name;
     private $email;
     private $password;
     private $verified_password;
     private $hashed;    // Necessary ?
+    private $error_messages = [];
+
 
     public function __construct($first_name, $last_name, $email, $password, $verified_password)
     {
@@ -20,62 +19,18 @@ class User extends DataBase
         $this->setPassword($password, $verified_password);
     }
 
-    public function getAllUsersStmt($email)
+    public function setName($name = null)
     {
-        /*Kör statementet i databasen före användaren skriver in sin input vilket skyddar
-        koden från att användaren lägger in något i databasen*/
-        $sql = 'SELECT * FROM users_db.users WHERE email = ?';
-        //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
-        $stmt = $this->connect()->prepare($sql);
-        //executing datan som användaren har skrivit in
-        $stmt->execute([$email]);
-        //Getting all users with that email
-        $users=$stmt->fetchAll();
+        //if (isset($_POST["firstname"])) {
 
-        foreach ($users as $user) {
-            echo  '<p>' . $user['firstname'] . '</p>' . "\n";
-            echo  '<p>' . $user['email'] . '</p>' . "\n";
-        }
-        print_r($users);
-        return $user['firstname'];
-    }
-
-    public function setName($name)
-    {
-        // TODO: Input control?
-        if (isset($_POST["firstname"])) {
-            if ($name != is_string($name) && $name != is_int($name)) {
-                echo "Name is not a string";
-                throw new Exception('$name must be a string!');
-                return $this->first_name = false;
+            if ($name == null || !preg_match("/^[a-zA-Z ]*$/", $name)) {
+                $this->error_messages[] = "Use only letters on Name field";
+                $this->first_name = null;
             } else {
-                //echo $name;
                 $this->first_name = $name;
             }
-        }
-    }
 
-    //Får värden från "setX" funktionerna efter att de har validerats och skickar resultatet till databasen om de ha gått igenom valideringen.
-    public function registerUserInDB($set_first_name, $set_last_name, $set_email, $set_password)
-    {
-        if (isset($_POST["submit_btn"])) {
-            //Checks if any of the users inputs are valid (not false).
-            if ($set_first_name !== false && $set_last_name !== false && $set_email !== false && $set_password !== false) {
-                //Checks in DB if email already exsists, else it inserts the users validated inputs into DB.
-                $sql_user_exsist = ("SELECT email FROM users_db.users WHERE email = :email");
-                $sthandler = $this->connect()->prepare($sql_user_exsist);
-                $sthandler->bindParam(':email', $set_email);
-                $sthandler->execute();
-                if ($sthandler->rowCount() > 0) {
-                    echo "Email already registerd! Please choose another email";
-                } else {
-                    $sql = ("INSERT INTO users_db.users(firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-                    $statement = $this->connect()->prepare($sql);
-                    $statement->execute([$set_first_name, $set_last_name, $set_email, $set_password]);
-                    echo "Successfully inserted user into DB!";
-                }
-            }
-        }
+        //}
     }
 
     public function getName()
@@ -143,6 +98,50 @@ class User extends DataBase
         return $this->password;
     }
 
+    public function getAllUsersStmt($email)
+    {
+        /*Kör statementet i databasen före användaren skriver in sin input vilket skyddar
+        koden från att användaren lägger in något i databasen*/
+        $sql = 'SELECT * FROM users_db.users WHERE email = ?';
+        //Hämtar connect-metod från DataBase-klassen och passar in $sql som argument i query-metoden.
+        $stmt = $this->connect()->prepare($sql);
+        //executing datan som användaren har skrivit in
+        $stmt->execute([$email]);
+        //Getting all users with that email
+        $users=$stmt->fetchAll();
+
+        foreach ($users as $user) {
+            echo  '<p>' . $user['firstname'] . '</p>' . "\n";
+            echo  '<p>' . $user['email'] . '</p>' . "\n";
+        }
+        print_r($users);
+        return $user['firstname'];
+    }
+
+
+    //Får värden från "setX" funktionerna efter att de har validerats och skickar resultatet till databasen om de ha gått igenom valideringen.
+    public function registerUserInDB($set_first_name, $set_last_name, $set_email, $set_password)
+    {
+        if (isset($_POST["submit_btn"])) {
+            //Checks if any of the users inputs are valid (not false).
+            if ($set_first_name !== false && $set_last_name !== false && $set_email !== false && $set_password !== false) {
+                //Checks in DB if email already exsists, else it inserts the users validated inputs into DB.
+                $sql_user_exsist = ("SELECT email FROM users_db.users WHERE email = :email");
+                $sthandler = $this->connect()->prepare($sql_user_exsist);
+                $sthandler->bindParam(':email', $set_email);
+                $sthandler->execute();
+                if ($sthandler->rowCount() > 0) {
+                    echo "Email already registerd! Please choose another email";
+                } else {
+                    $sql = ("INSERT INTO users_db.users(firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+                    $statement = $this->connect()->prepare($sql);
+                    $statement->execute([$set_first_name, $set_last_name, $set_email, $set_password]);
+                    echo "Successfully inserted user into DB!";
+                }
+            }
+        }
+    }
+
 
     public function isPasswordCorrect($password)
     {
@@ -153,7 +152,6 @@ class User extends DataBase
         Return True/False
         */
     }
-
 
     public function registerOnDB()
     {
