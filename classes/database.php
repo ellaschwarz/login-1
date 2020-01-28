@@ -14,29 +14,29 @@ class DataBase
     private $unix_socket;
 
     /* JOHANS */
-    // public function connect()
-    // {
-    //     $this->host = '127.0.0.1';
-    //     $this->port = '10003';
-    //     $this->db = 'users_db';
-    //     $this->user = 'root';
-    //     $this->pass = 'root';
-    //     $this->charset = 'utf8mb4';
+    public function connect()
+    {
+        $this->host = '127.0.0.1';
+        $this->port = '10003';
+        $this->db = 'users_db';
+        $this->user = 'root';
+        $this->pass = 'root';
+        $this->charset = 'utf8mb4';
 
-    //     try {
-    //         $dsn = "mysql:host=$this->host;port=$this->port;dbname=$this->db;charset=$this->charset";
-    //         $pdo = new PDO($dsn, $this->user, $this->pass);
-    //         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    //         return $pdo;
-    //         //Om det blir error så kan felmeddelandet visas på sidan
-    //     } catch (PDOException $e) {
-    //         echo "Unable to connect: ".$e->getMessage();
-    //     }
-    // }
+        try {
+            $dsn = "mysql:host=$this->host;port=$this->port;dbname=$this->db;charset=$this->charset";
+            $pdo = new PDO($dsn, $this->user, $this->pass);
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            return $pdo;
+            //Om det blir error så kan felmeddelandet visas på sidan
+        } catch (PDOException $e) {
+            echo "Unable to connect: ".$e->getMessage();
+        }
+    }
     /* JOHANS */
 
     /* ELLAS & BRYANS */
-    public function connect()
+/*     public function connect()
     {
         $this->unix_socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
         $this->db = 'users_db';
@@ -54,7 +54,7 @@ class DataBase
         } catch (PDOException $e) {
             echo "Unable to connect: ".$e->getMessage();
         }
-    }
+    } */
 }
     /* ELLAS & BRYANS */
 
