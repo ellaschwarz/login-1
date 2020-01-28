@@ -96,7 +96,10 @@ class User extends DataBase
         return $this->password;
     }
 
-    // Return FALSE if some input is null
+    /*
+        Evaluates if some object property (inputs) has NULL as a value
+        If so just return FALSE att the first NULL
+    */
     public function areInputsValid() {
         $inputs = [$this->first_name, $this->last_name, $this->email, $this->password];
         foreach ($inputs as $input) {
@@ -107,6 +110,10 @@ class User extends DataBase
         return true;
     }
 
+    /*
+        Prints all errors messages saved when
+        each SETTER evaluated the input.
+    */
     public function showErrorMessages() {
         foreach ($this->error_messages as $error) {
             echo $error . PHP_EOL;
@@ -133,7 +140,6 @@ class User extends DataBase
         return $user['firstname'];
     }
 
-
     //Får värden från "setX" funktionerna efter att de har validerats och skickar resultatet till databasen om de ha gått igenom valideringen.
     public function registerUserInDB()
     {
@@ -154,7 +160,6 @@ class User extends DataBase
         //}
     }
 
-
     public function isPasswordCorrect($password)
     {
         /*
@@ -162,14 +167,6 @@ class User extends DataBase
         Compare password entered by user with
         the hashed-password.
         Return True/False
-        */
-    }
-
-    public function registerOnDB()
-    {
-        /*
-        Parameters should have been controled by its own setter at this point.
-        Just SET all user info in DB
         */
     }
 

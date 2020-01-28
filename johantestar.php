@@ -6,7 +6,7 @@ $object = new DataBase();
 $object->connect();
 
 
-$usuario = new User("Pablo", "Picapiedra", "pablo@pablo.com", "pablo", "pablo");
+$usuario = new User("Betty", "Marmol", "betty@betty.com", "betty", "betty");
 //$usuario->print();
 if (!$usuario->areInputsValid()) {
     $usuario->showErrorMessages();
