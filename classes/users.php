@@ -135,26 +135,23 @@ class User extends DataBase
 
 
     //Får värden från "setX" funktionerna efter att de har validerats och skickar resultatet till databasen om de ha gått igenom valideringen.
-    public function registerUserInDB($set_first_name, $set_last_name, $set_email, $set_password)
+    public function registerUserInDB()
     {
-        if (isset($_POST["submit_btn"])) {
-            //Checks if any of the users inputs are valid (not false).
-            if ($set_first_name !== false && $set_last_name !== false && $set_email !== false && $set_password !== false) {
-                //Checks in DB if email already exsists, else it inserts the users validated inputs into DB.
-                $sql_user_exsist = ("SELECT email FROM users_db.users WHERE email = :email");
-                $sthandler = $this->connect()->prepare($sql_user_exsist);
-                $sthandler->bindParam(':email', $set_email);
-                $sthandler->execute();
-                if ($sthandler->rowCount() > 0) {
-                    echo "Email already registerd! Please choose another email";
-                } else {
-                    $sql = ("INSERT INTO users_db.users(firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-                    $statement = $this->connect()->prepare($sql);
-                    $statement->execute([$set_first_name, $set_last_name, $set_email, $set_password]);
-                    echo "Successfully inserted user into DB!";
-                }
+        //if (isset($_POST["submit_btn"])) {
+            //Checks in DB if email already exsists, else it inserts the users validated inputs into DB.
+            $sql_user_exsist = ("SELECT email FROM users_db.users WHERE email = :email");
+            $sthandler = $this->connect()->prepare($sql_user_exsist);
+            $sthandler->bindParam(':email', $this->email);
+            $sthandler->execute();
+            if ($sthandler->rowCount() > 0) {
+                echo "Email already registerd! Please choose another email";
+            } else {
+                $sql = ("INSERT INTO users_db.users(firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+                $statement = $this->connect()->prepare($sql);
+                $statement->execute([$this->first_name, $this->last_name, $this->email, $this->password]);
+                echo "Successfully inserted user into DB!";
             }
-        }
+        //}
     }
 
 

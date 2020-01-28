@@ -6,10 +6,10 @@ $object = new DataBase();
 $object->connect();
 
 
-$usuario = new User("Vilma", "Picapiedra", "vilma@vilma.com", "vima", "vilma");
+$usuario = new User("Pablo", "Picapiedra", "pablo@pablo.com", "pablo", "pablo");
 //$usuario->print();
 if (!$usuario->areInputsValid()) {
     $usuario->showErrorMessages();
 } else {
-    echo "Guardar en database";
+    $usuario->registerUserInDB();
 }
