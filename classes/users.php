@@ -175,9 +175,9 @@ class User extends DataBase
     // Just for testing purposes
     public function print()
     {
-        // echo "Name is $this->first_name" . PHP_EOL;
-        // echo "Last name is $this->last_name" . PHP_EOL;
-        // echo "Email is $this->email" . PHP_EOL;
-        // echo "Password is $this->password" . PHP_EOL;
+        echo "Name is $this->first_name" . PHP_EOL;
+        echo "Last name is $this->last_name" . PHP_EOL;
+        echo "Email is $this->email" . PHP_EOL;
+        echo "Password is $this->password" . PHP_EOL;
     }
 }
