@@ -19,14 +19,14 @@
         </div>
         <form action="/" method="post">
             <div class="form-group">
-                <input type="text" class="form-control mt-2" name="firstname" placeholder="First name">
-                <input type="text" class="form-control mt-2" name="lastname" placeholder="Last name">
-                <input type="email" class="form-control mt-2" name="email" placeholder="Email">
+                <input type="text" class="form-control mt-2" name="firstname" placeholder="First name" required>
+                <input type="text" class="form-control mt-2" name="lastname" placeholder="Last name" required>
+                <input type="email" class="form-control mt-2" name="email" placeholder="Email" required>
                 <input type="password" class="form-input form-control mt-2" name="password" id="password"
-                    placeholder="Password">
+                    placeholder="Password" required>
                 <span><i toggle="#password" class="fas fa-eye-slash toggle-password" id="eyeIcon"></i></span>
                 <input type="password" toggle="#verifiedpassword" class="form input form-control mt-2" name="verifiedpassword"
-                    id="verifyPassword" placeholder="Repeat your password">
+                    id="verifyPassword" placeholder="Repeat your password" required>
             </div>
 
             <span>Already have an account? <a href="/" class="text-primary" id="login-link">Sign in!</a></span><br>

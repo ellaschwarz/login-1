@@ -133,7 +133,6 @@ class User extends DataBase
         return $this->password;
     }
 
-
     public function isPasswordCorrect($password)
     {
         /*
@@ -144,13 +143,17 @@ class User extends DataBase
         */
     }
 
+    // public function registerOnDB()
+    // {
+    //     /*
+    //     Parameters should have been controled by its own setter at this point.
+    //     Just SET all user info in DB
+    //     */
+    // }
 
-    public function registerOnDB()
+    public function startSession()
     {
-        /*
-        Parameters should have been controled by its own setter at this point.
-        Just SET all user info in DB
-        */
+        
     }
 
     public function login($username, $password)

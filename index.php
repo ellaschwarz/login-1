@@ -1,6 +1,9 @@
 <?php
 include 'classes/database.php';
 include 'classes/users.php';
+
+//Starts a new session
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +32,8 @@ include 'classes/users.php';
           </div>
 
           <div class="form-group">
-            <input type="text" class="form-control" name="email_login" placeholder="Email" id="emailVal">
-            <input type="password" class="form-control mt-1" name="password_login" placeholder="Password">
+            <input type="text" class="form-control" name="email_login" placeholder="Email" id="emailVal" required>
+            <input type="password" class="form-control mt-1" name="password_login" placeholder="Password" required>
             <span>Don't have an account? <a href="/register.php" class="text-primary" id="register">Create one!</a></span><br>
             <input type="submit" value="Sign in" class="btn btn-primary mt-1">
         </form>
@@ -58,6 +61,11 @@ $getUserobject = new User($first_name, $last_name, $email, $password, $verifiedp
 //$getUserobject->getAllUsers();
 // $getUserobject->getAllUsersStmt("Ella", "Schwarz");
 // $getUserobject->getName($first_name);
+
+if($getUserobject->startSession() )
+{
+  header("location:index.php");
+}
 
 //Validates user input, returns value if OK otherwise returns false.
 $set_first_name = $getUserobject->setName($first_name);
