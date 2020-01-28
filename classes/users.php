@@ -72,11 +72,11 @@ class User extends DataBase
     {
         if (isset($password, $verified_password)) {
             if ($password === $verified_password && $password !== "" && $verified_password !== "") {
-                echo "passwords matches";
-                $this->password = $password;
+                // Hashing password
+                $this->password = password_hash($password, PASSWORD_DEFAULT);
             } else {
-                echo "ERROR: Passwords do not match.";
-                return $this->password = false;
+                $this->error_messages[] = "Passwords do not match";
+                $this->password = null;
             }
         }
     }
