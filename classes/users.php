@@ -96,6 +96,23 @@ class User extends DataBase
         return $this->password;
     }
 
+    // Return FALSE if some input is null
+    public function areInputsValid() {
+        $inputs = [$this->first_name, $this->last_name, $this->email, $this->password];
+        foreach ($inputs as $input) {
+            if ($input == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function showErrorMessages() {
+        foreach ($this->error_messages as $error) {
+            echo $error . PHP_EOL;
+        }
+    }
+
     public function getAllUsersStmt($email)
     {
         /*Kör statementet i databasen före användaren skriver in sin input vilket skyddar
