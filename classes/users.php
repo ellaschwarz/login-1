@@ -22,14 +22,12 @@ class User extends DataBase
     public function setName($name = null)
     {
         //if (isset($_POST["firstname"])) {
-
             if ($name == null || !preg_match("/^[a-zA-Z ]*$/", $name)) {
                 $this->error_messages[] = "Use only letters on Name field";
                 $this->first_name = null;
             } else {
                 $this->first_name = $name;
             }
-
         //}
     }
 
@@ -38,17 +36,16 @@ class User extends DataBase
         return $this->first_name;
     }
 
-    public function setLastName($last)
+    public function setLastName($last = null)
     {
-        // TODO: Input control?
-        if (isset($last)) {
-            if (!is_string($last)) {
-                throw new Exception('$name must be a string!');
-                return $this->last_name = false;
+        //if (isset($last)) {
+            if ($last == null || !preg_match("/^[a-zA-Z ]*$/", $last)) {
+                $this->error_messages[] = "Use only letters on Last Name field";
+                $this->last_name = null;
             } else {
                 $this->last_name = $last;
             }
-        }
+        //}
     }
     
     public function getLastName()
@@ -58,10 +55,11 @@ class User extends DataBase
 
     public function setEmail($email)
     {
-        if (isset($email)) {
-            $this->email = $email;
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->error_messages[] = "Email has an invalid format";
+            $this->email = null;
         } else {
-            return $this->email = false;
+            $this->email = $email;
         }
     }
     
